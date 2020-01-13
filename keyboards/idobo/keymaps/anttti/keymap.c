@@ -6,6 +6,40 @@
 #define _HARDWARE 3
 #define _MISC 4
 
+enum custom_keycodes {
+    LOWERCASE_AE = SAFE_RANGE,
+    UPPERCASE_AE,
+    LOWERCASE_OE,
+    UPPERCASE_OE,
+};
+
+/* Custom macros for outputting äöÄÖ */
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LOWERCASE_AE:
+            if (record->event.pressed) {
+                SEND_STRING("test test foo bar");
+            }
+            break;
+        case UPPERCASE_AE:
+            if (record->event.pressed) {
+                SEND_STRING("Ä");
+            }
+            break;
+        case LOWERCASE_OE:
+            if (record->event.pressed) {
+                SEND_STRING("ö");
+            }
+            break;
+        case UPPERCASE_OE:
+            if (record->event.pressed) {
+                SEND_STRING("Ö");
+            }
+            break;
+    }
+    return true;
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* QWERTY
      * .----------------------------------------------------------------------------------------------------------------------------------------.
@@ -21,12 +55,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * '----------------------------------------------------------------------------------------------------------------------------------------'
     */
 
+
+    /* QWERTY
+     * .----------------------------------------------------------------------------------------------------------------------------------------.
+     * | ESC      | 1      | 2      | 3      | 4      | 5      | _      | `      | +      | 6      | 7      | 8      | 9      | 0      | BACKSP |
+     * |----------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------|
+     * | MEH(TAB) | Q      | W      | E      | R      | T      | -      | \      | =      | Y      | U      | I      | O      | P      | '      |
+     * |----------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------+--------|
+     * | LCTL_ESC | A      | S      | D      | F      | G      | [      | PG_UP  | ]      | H      | J      | K      | L      | ;      | ENTER  |
+     * |----------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------------------------+--------|
+     * | LSHIFT   | Z      | X      | C      | V      | B      | {      | PG_DN  | }      | N      | M      | ,      | .      | /      | RSHIFT |
+     * |----------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
+     * | LGUI     | LCTRL  | MO(3)  | LALT   | MO(1)  | BACKSP | HOME   | DEL    | END    | ENTER  | MO(2)  | LEFT   | DOWN   | UP     | RIGHT  |
+     * '----------------------------------------------------------------------------------------------------------------------------------------'
+    */
+
 	[_QWERTY] = LAYOUT_ortho_5x15(
-        KC_ESC,         KC_1,    KC_2,  KC_3,    KC_4,    KC_5,  KC_MINS, KC_GRV,  KC_EQL,  KC_6,   KC_7,  KC_8,    KC_9,   KC_0,    KC_BSPC,
-        MEH_T(KC_TAB),  KC_Q,    KC_W,  KC_E,    KC_R,    KC_T,  KC_LBRC, KC_BSLS, KC_RBRC, KC_Y,   KC_U,  KC_I,    KC_O,   KC_P,    KC_QUOT,
-        LCTL_T(KC_ESC), KC_A,    KC_S,  KC_D,    KC_F,    KC_G,  KC_HOME, KC_DEL,  KC_PGUP, KC_H,   KC_J,  KC_K,    KC_L,   KC_SCLN, KC_ENT,
-        KC_LSFT,        KC_Z,    KC_X,  KC_C,    KC_V,    KC_B,  KC_END,  KC_UP,   KC_PGDN, KC_N,   KC_M,  KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-        KC_LGUI,        KC_LCTL, MO(3), KC_LALT, KC_BSPC, MO(1), KC_LEFT, KC_DOWN, KC_RGHT, KC_SPC, MO(2), KC_RALT, MO(4),  KC_RCTL, KC_RGUI),
+        KC_ESC,         KC_1,    KC_2,  KC_3,    KC_4,    KC_5,  KC_UNDS, KC_GRV,  KC_PLUS, KC_6,   KC_7,  KC_8,    KC_9,   KC_0,    KC_BSPC,
+        MEH_T(KC_TAB),  KC_Q,    KC_W,  KC_E,    KC_R,    KC_T,  KC_MINS, KC_BSLS, KC_EQL,  KC_Y,   KC_U,  KC_I,    KC_O,   KC_P,    KC_QUOT,
+        LCTL_T(KC_ESC), KC_A,    KC_S,  KC_D,    KC_F,    KC_G,  KC_LBRC, KC_PGUP, KC_RBRC, KC_H,   KC_J,  KC_K,    KC_L,   KC_SCLN, KC_ENT,
+        KC_LSFT,        KC_Z,    KC_X,  KC_C,    KC_V,    KC_B,  KC_LCBR, KC_PGDN, KC_RCBR, KC_N,   KC_M,  KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+        KC_LGUI,        KC_LCTL, MO(3), KC_LALT, KC_BSPC, MO(1), KC_HOME, KC_DEL,  KC_END,  KC_SPC, MO(2), KC_LEFT, KC_DOWN, KC_UP,  KC_RIGHT),
 
 	[_FN] = LAYOUT_ortho_5x15(
         KC_MUTE, KC_F1,   KC_F2, KC_F3,   KC_F4,   KC_F5,  KC_NO,   KC_NO,   KC_NO,   KC_F6,         KC_F7,   KC_F8,   KC_F9,          KC_F10,  KC_F11,
@@ -51,8 +100,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_MISC] = LAYOUT_ortho_5x15(
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO,
-        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO,
+        KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LOWERCASE_OE,   KC_NO, KC_NO,
+        KC_NO, LOWERCASE_AE, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO,
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO,
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_NO, KC_NO)
 };
