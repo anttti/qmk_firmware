@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Alphas
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |  NOOP  |   1  |   2  |   3  |   4  |   5  | Lock |           | Clmk |   6  |   7  |   8  |   9  |   0  |  NOOP  |
+ * |  Sleep |   1  |   2  |   3  |   4  |   5  | Lock |           | Clmk |   6  |   7  |   8  |   9  |   0  |  NOOP  |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | MehTab |   Q  |   W  |   E  |   R  |   T  |  [   |           |  ]   |   Y  |   U  |   I  |   O  |   P  |   '    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -53,11 +53,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [BASE] = LAYOUT_ergodox(
   // left hand
-  KC_NO,          KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   C(G(KC_Q)),
-  MEH_T(KC_TAB),  KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_LBRC,
-  LCTL_T(KC_ESC), CTL_A,        ALT_S,  GUI_D,  SFT_F,  KC_G,
-  KC_LSPO,        KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_MINS,
-  KC_LGUI,        KC_BSLS,      KC_NO,  KC_NO,  LALT_T(KC_ESC),
+  C(G(S(A(KC_Z)))), KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   C(G(KC_Q)),
+  MEH_T(KC_TAB),    KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_LBRC,
+  LCTL_T(KC_ESC),   CTL_A,        ALT_S,  GUI_D,  SFT_F,  KC_G,
+  KC_LSPO,          KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_MINS,
+  KC_LGUI,          KC_BSLS,      KC_NO,  KC_NO,  LALT_T(KC_ESC),
 
                                                KC__VOLDOWN,   KC__VOLUP,
                                                               KC_PGUP,
