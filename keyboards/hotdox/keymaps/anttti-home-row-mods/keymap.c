@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
- *                                 | Mo(1)|      |------|       |------|  Del | Bcks |
+ *                                 |      |      |------|       |------|  Del | Bcks |
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
@@ -182,61 +182,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TRNS,
   KC_TRNS, KC_TRNS, KC_WBAK
 )};
-
-// bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
-//   switch (keycode) {
-//     case KC_BSPC:
-//       return false;
-//     default:
-//       return true;
-//   }
-// }
-
-// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//   switch (keycode) {
-//     // dynamically generate these.
-//     case VRSN:
-//       if (record->event.pressed) {
-//         SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-//       }
-//       return false;
-//       break;
-//     case RGB_SLD:
-//       if (record->event.pressed) {
-//         #ifdef RGBLIGHT_ENABLE
-//           rgblight_mode(1);
-//         #endif
-//       }
-//       return false;
-//       break;
-//   }
-//   return true;
-// }
-
-// // Runs just one time when the keyboard initializes.
-// void matrix_init_user(void) {
-
-// };
-
-
-// // Runs constantly in the background, in a loop.
-// void matrix_scan_user(void) {
-
-//     uint8_t layer = biton32(layer_state);
-
-//     ergodox_right_led_1_off();
-//     ergodox_right_led_2_off();
-//     ergodox_right_led_3_off();
-//     switch (layer) {
-//       // TODO: Make this relevant to the ErgoDox EZ.
-//         case 1:
-//             ergodox_right_led_1_on();
-//             break;
-//         case 2:
-//             ergodox_right_led_2_on();
-//             break;
-//         default:
-//             // none
-//             break;
-//     }
-// };
