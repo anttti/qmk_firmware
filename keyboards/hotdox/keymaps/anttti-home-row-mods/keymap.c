@@ -2,9 +2,9 @@
 #include "version.h"
 
 #define BASE 0
-#define NAVI 1
+#define COLEMAK 1
+#define NAVI 3
 #define SYMB 2
-#define COLEMAK 3
 
 // Left-hand home row mods
 #define CTL_A LCTL_T(KC_A)
@@ -57,17 +57,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   MEH_T(KC_TAB),    KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   KC_LBRC,
   LCTL_T(KC_ESC),   CTL_A,        ALT_S,  GUI_D,  SFT_F,  KC_G,
   KC_LSPO,          KC_Z,         KC_X,   KC_C,   KC_V,   KC_B,   KC_MINS,
-  KC_LGUI,          KC_BSLS,      KC_NO,  KC_NO,  LALT_T(KC_ESC),
+  KC_LGUI,          KC_BSLS,      KC_NO,  KC_NO,  KC_ESC,
 
                                                KC__VOLDOWN,   KC__VOLUP,
                                                               KC_PGUP,
-                                        MO(1), MEH_T(KC_TAB), KC_HOME,
+                                     MO(NAVI), MEH_T(KC_TAB), KC_HOME,
   // right hand
   TG(COLEMAK), KC_6,   KC_7,          KC_8,   KC_9,   KC_0,     KC_NO,
   KC_RBRC,     KC_Y,   KC_U,          KC_I,   KC_O,   KC_P,     KC_QUOT,
                KC_H,   SFT_J,         GUI_K,  ALT_L,  CTL_SCLN, KC_ENT,
   KC_EQL,      KC_N,   KC_M,          KC_COMM,KC_DOT, KC_SLSH,  KC_RSPC,
-                       LT(2, KC_GRV), KC_NO,  KC_NO,  KC_NO,    KC_NO,
+                    LT(SYMB, KC_GRV), KC_NO,  KC_NO,  KC_NO,    KC_NO,
 
   KC_MPLY, G(S(C(KC_4))),
   KC_PGDN,
@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                                                KC_TRNS, KC_TRNS,
                                                         KC_TRNS,
-                                      MO(1),   KC_TRNS, KC_TRNS,
+                                     MO(NAVI), KC_TRNS, KC_TRNS,
   // right hand
   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
   KC_TRNS, KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_TRNS,
