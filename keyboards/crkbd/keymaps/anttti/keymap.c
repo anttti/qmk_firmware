@@ -1,10 +1,12 @@
 #include QMK_KEYBOARD_H
 
-#define BASE 0
-#define NAVI 2
-#define NUM 4
-#define SYM 8
-#define FNMD 16
+enum layer_names {
+  BASE,
+  NAVI,
+  NUM,
+  SYM,
+  FNMD
+};
 
 // Colemak Left-hand home row mods
 #define CTL_A LCTL_T(KC_A)
@@ -76,7 +78,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 
 void oled_render_layer_state(void) {
-  switch (layer_state) {
+  switch (get_highest_layer(layer_state)) {
     case BASE:
       oled_write_ln_P(PSTR("Base"), false);
       break;
@@ -87,15 +89,13 @@ void oled_render_layer_state(void) {
       oled_write_ln_P(PSTR("Numb"), false);
       break;
     case SYM:
-      oled_write_ln_P(PSTR("Sym"), false);
+      oled_write_ln_P(PSTR("Sym "), false);
       break;
     case FNMD:
-    case FNMD|NAVI:
-    case FNMD|NUM:
-    case FNMD|SYM:
-    case FNMD|NAVI|NUM:
-    case FNMD|NAVI|SYM:
       oled_write_ln_P(PSTR("Func"), false);
+      break;
+    default:
+      oled_write_ln_P(PSTR("Unkn"), false);
       break;
   }
 
